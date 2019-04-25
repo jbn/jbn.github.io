@@ -1,0 +1,8 @@
+{
+	"www_defaults": {
+		"base_url": "https://thoughts.johnbnelson.com/",
+		"site_name": "generativist's thoughts",
+		"twitter": "generativist",
+		"author": "John Bjorn Nelson"
+	}
+}

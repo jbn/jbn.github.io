@@ -1,0 +1,7 @@
+*.html
+*_files/
+.ipynb_checkpoints
+.ipynb
+*.pyc
+*.log
+.mypy_cache
