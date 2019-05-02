@@ -5,3 +5,4 @@
 *.pyc
 *.log
 .mypy_cache
+!templates/*.html

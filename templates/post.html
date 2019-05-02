@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <!-- :// links break on dat?-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/sunburst.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+$if(math)$
+  $math$
+$endif$
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+$for(header-includes)$
+  $header-includes$
+$endfor$
+
+<meta name="description" content="$abstract$">
+<meta name="author" content="$author$">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@$twitter$">
+<meta name="twitter:creator" content="@$twitter$">
+<meta name="twitter:description" content="$abstract$">
+
+$if(big_image)$
+<meta name="twitter:image" content="$big_image$">
+<meta property="og:image" content="$big_image$">
+$endif$
+
+$if(subtitle)$
+<meta property="og:title" content="$title$: $subtitle$">
+<meta name="twitter:title" content="$title$: $subtitle$">
+$else$
+<meta property="og:title" content="$title$">
+<meta name="twitter:title" content="$title$">
+$endif$
+
+<meta property="og:site_name" content="$site_name$">
+<meta property="og:url" content="$url$">
+<meta property="og:description" content="$abstract$">
+<meta property="og:type" content="article">
+</head>
+<body>
+$for(include-before)$
+$include-before$
+$endfor$
+$if(title)$
+<header id="title-block-header">
+<h1 class="title">$title$</h1>
+$if(subtitle)$
+<p class="subtitle">$subtitle$</p>
+$endif$
+$if(date)$
+<p class="date">$date$</p>
+$endif$
+</header>
+$endif$
+$if(toc)$
+<nav id="$idprefix$TOC" role="doc-toc">
+$table-of-contents$
+</nav>
+$endif$
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>
