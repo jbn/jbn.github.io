@@ -337,3 +337,17 @@ page-break-after: avoid;
 }
 
 
+p.caption {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: smaller;
+    font-style: italic;
+}
+
+
+p.caption {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: smaller;
+    font-style: italic;
+}
