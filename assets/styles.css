@@ -235,7 +235,7 @@ div.figure {
   margin: 1em 0;
 }
 
-div.figure > img {
+div.figure > img, p > img {
      margin: 0 auto;
 }
 
