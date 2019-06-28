@@ -34,6 +34,9 @@ def list_dir():
                 continue
             if os.path.exists(os.path.join(f, "index.ipynb")):
                 sub_dirs.append("- [{}]({})".format(f, f))
+                
+        sub_dirs = sorted(sub_dirs)
+        
         if sub_dirs:
             content += "## Sub Directories\n\n{}\n".format("\n".join(sub_dirs))
 
