@@ -7,6 +7,16 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
+nav {
+    display: block;
+    background-color: aliceblue;
+    padding: 3px;
+}
+
+nav a:visited {
+    color: #0645ad;
+}
+
 body {
   color: #444;
   font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
@@ -41,9 +51,13 @@ a:focus {
 }
 
 h1.title {
+  text-align: center;
+  margin-top: 1em;
   margin-bottom: 0;
 }
+
 p.subtitle {
+  text-align: center;
   margin-top: 0;
   margin-bottom: 2em;
   padding: 0;

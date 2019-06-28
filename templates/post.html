@@ -59,6 +59,13 @@ $for(include-before)$
 $include-before$
 $endfor$
 $if(title)$
+    
+$if(crumbs)$
+<nav>
+    $crumbs$
+</nav>
+$endif$
+    
 <header id="title-block-header">
 <h1 class="title">$title$</h1>
 $if(subtitle)$

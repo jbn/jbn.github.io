@@ -8,6 +8,55 @@ import yaml
 import nbformat
 
 
+def find_project_root():
+    current_dir = os.getcwd()
+    
+    while not os.path.exists(os.path.join(current_dir, "dat.json")):
+        current_dir = os.path.normpath(os.path.join(current_dir, os.path.pardir))
+        
+    return current_dir
+
+
+def _read_nb_title_for_crumbs(file_path):
+    nb = nbformat.read(file_path, as_version=4)
+    return nb['metadata'].get('www', {}).get('title', file_path).lower()
+
+
+def attach_crumbs(file_path, cfg):
+    project_root = os.path.abspath(find_project_root())
+    crumbs = []
+    current_dir = os.path.abspath(os.path.join(os.path.curdir, os.path.dirname(file_path)))
+    
+    import sys
+    print("\n\n1. ", current_dir, file=sys.stderr)
+    
+    # The home page doesn't need crumbs.
+    if project_root == current_dir:
+        return
+    
+    # Add italic title as a [you are here] marker.
+    current_nb = file_path
+    if not current_nb.endswith('index.ipynb'):
+        title = _read_nb_title_for_crumbs(current_nb)
+        crumbs.append(f"*{title}*")
+
+    while True:
+        index_file = os.path.join(current_dir, "index.ipynb")
+        title = _read_nb_title_for_crumbs(index_file)
+        url_path = index_file[len(project_root):-len("index.ipynb")]
+        
+        # The last crumb should be italicized, not linked.
+        snippet = f"[{title}]({url_path})" if crumbs else f"*{title}*"
+        crumbs.append(snippet)
+        
+        if current_dir == project_root:
+            break
+
+        current_dir = os.path.normpath(os.path.join(current_dir, os.path.pardir))
+    
+    cfg['crumbs'] = " &raquo; ".join(reversed(crumbs))
+
+
 def is_image_ext(name):
     name = name.lower()
     exts = ".jpeg, .jpg, .gif, .png, .bmp".split(", ")
@@ -47,6 +96,7 @@ def build_md_header(file_path):
     url_path = file_path.replace(".ipynb", ".html")
     cfg['url'] = urllib.parse.urljoin(cfg['base_url'], url_path)
     identify_share_images(file_path, cfg)
+    attach_crumbs(file_path, cfg)
 
     return "---\n{}...\n".format(yaml.dump(cfg))
 
