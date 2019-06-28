@@ -215,6 +215,16 @@ img {
   vertical-align: middle;
 }
 
+div.figure {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+div.figure > img {
+     margin: 0 auto;
+}
+
 figure {
   display: block;
   text-align: center;
