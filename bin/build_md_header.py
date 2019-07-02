@@ -30,9 +30,6 @@ def attach_crumbs(file_path, cfg):
     crumbs = []
     current_dir = os.path.abspath(os.path.join(os.path.curdir, os.path.dirname(file_path)))
     
-    import sys
-    print("\n\n1. ", current_dir, file=sys.stderr)
-    
     # The home page doesn't need crumbs.
     if project_root == current_dir:
         return
@@ -86,8 +83,7 @@ def identify_share_images(file_path, cfg):
     image_files = list(filter(is_image_ext, sorted(os.listdir(files_dir), key=num_parts)))
     if image_files:
         base_url = cfg['base_url']
-        image_file = image_files[cfg.get('share_image', 0)]
-        
+        image_file = image_files[cfg.get('share_img', 0)]
         
         if image_file.lower().endswith('.svg'):
             out_file = image_file[:-4] + '.png'
