@@ -8,6 +8,7 @@ import yaml
 import nbformat
 import subprocess
 import shlex
+from string import digits
 
 
 def find_project_root():
@@ -59,9 +60,18 @@ def attach_crumbs(file_path, cfg):
     cfg['crumbs'] = " &raquo; ".join(reversed(crumbs))
 
 
+
+ID_CHARS = set(digits + '_')
+
+
+def num_parts(s):
+    s = "".join(c for c in s if c in ID_CHARS)
+    return tuple([int(item) for item in s.split('_') if item.strip()])
+
+
 def is_image_ext(name):
     name = name.lower()
-    exts = ".jpeg, .jpg, .gif, .png, .bmp".split(", ")
+    exts = ".jpeg, .jpg, .gif, .png, .bmp, .svg".split(", ")
     return any(name.endswith(ext) for ext in exts)
 
 
@@ -72,12 +82,20 @@ def identify_share_images(file_path, cfg):
     files_dir = os.path.join(*(parts[:-1] + (name + "_files",)))
     if not os.path.exists(files_dir):
         return False
-
-    image_files = list(filter(is_image_ext, os.listdir(files_dir)))
+    
+    image_files = list(filter(is_image_ext, sorted(os.listdir(files_dir), key=num_parts)))
     if image_files:
         base_url = cfg['base_url']
-        url_path = os.path.join(files_dir, image_files[0])
-
+        image_file = image_files[cfg.get('share_image', 0)]
+        
+        
+        if image_file.lower().endswith('.svg'):
+            out_file = image_file[:-4] + '.png'
+            cmd = f'inkscape -z -e {out_file} {image_file}'
+            subprocess.check_output(shlex.split(cmd), cwd=files_dir)
+            image_file = out_file
+            
+        url_path = os.path.join(files_dir, image_file)
         cfg['big_image'] = urllib.parse.urljoin(base_url, url_path)
         return True
     else:
@@ -106,6 +124,7 @@ def build_md_header(file_path):
     cfg.update(nb['metadata'].get('www', {}))
     url_path = file_path.replace(".ipynb", ".html")
     cfg['url'] = urllib.parse.urljoin(cfg['base_url'], url_path)
+    
     identify_share_images(file_path, cfg)
     attach_crumbs(file_path, cfg)
     attach_version(file_path, cfg)
