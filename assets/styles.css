@@ -50,6 +50,10 @@ a:focus {
   outline: thin dotted;
 }
 
+#title-block-header {
+    margin-bottom: 40px
+}
+
 h1.title {
   text-align: center;
   margin-top: 1em;
@@ -59,9 +63,13 @@ h1.title {
 p.subtitle {
   text-align: center;
   margin-top: 0;
-  margin-bottom: 2em;
+  margin-bottom: 0;
   padding: 0;
   font-size: 18pt;
+}
+
+p.version {
+    text-align: center
 }
 
 *::-moz-selection {
@@ -87,6 +95,8 @@ a::selection {
 p {
   margin: 1em 0;
 }
+
+
 
 img {
   max-width: 100%;

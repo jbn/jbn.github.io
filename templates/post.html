@@ -74,6 +74,9 @@ $endif$
 $if(date)$
 <p class="date">$date$</p>
 $endif$
+$if(git_hash)$
+    <p class="version">Version: <a href="https://github.com/jbn/thoughts/commit/$git_hash$">$git_short_hash$</a></p>
+$endif$
 </header>
 $endif$
 $if(toc)$

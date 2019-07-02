@@ -6,6 +6,8 @@ import sys
 import urllib
 import yaml
 import nbformat
+import subprocess
+import shlex
 
 
 def find_project_root():
@@ -80,6 +82,15 @@ def identify_share_images(file_path, cfg):
         return True
     else:
         return False
+    
+    
+def attach_version(file_path, cfg):
+    if file_path.endswith('index.ipynb'):
+        return
+        
+    head = subprocess.check_output(shlex.split('git rev-parse --short HEAD')).strip().decode()
+    cfg['git_hash'] = head
+    cfg['git_short_hash'] = head[:7]
 
 
 def build_md_header(file_path):
@@ -97,6 +108,7 @@ def build_md_header(file_path):
     cfg['url'] = urllib.parse.urljoin(cfg['base_url'], url_path)
     identify_share_images(file_path, cfg)
     attach_crumbs(file_path, cfg)
+    attach_version(file_path, cfg)
 
     return "---\n{}...\n".format(yaml.dump(cfg))
 
