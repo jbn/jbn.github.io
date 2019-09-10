@@ -9,7 +9,7 @@ build: $(OBJECTS)
 
 .PHONY: serve
 serve: 
-	python -m SimpleHTTPServer 8000
+	python -m http.server 8001
 
 %.html: %.md
 	pandoc \
