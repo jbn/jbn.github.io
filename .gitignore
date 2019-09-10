@@ -1,4 +1,6 @@
-*.html
+# For github pages, generate and commit!
+#*.html
+
 *_files/
 .ipynb_checkpoints
 .ipynb

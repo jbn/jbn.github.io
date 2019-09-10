@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="John Bjorn Nelson" />
+  <meta name="keywords" content="git" />
+  <title>TIL: git clean</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <!-- :// links break on dat?-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/sunburst.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+
+<meta name="description" content="This built-in subcommand lets you keep things tidy.">
+<meta name="author" content="John Bjorn Nelson">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@generativist">
+<meta name="twitter:creator" content="@generativist">
+<meta name="twitter:description" content="This built-in subcommand lets you keep things tidy.">
+
+<meta name="twitter:image" content="https://thoughts.johnbnelson.com/til/git_files/git_0_0.jpeg">
+<meta property="og:image" content="https://thoughts.johnbnelson.com/til/git_files/git_0_0.jpeg">
+
+<meta property="og:title" content="TIL: git clean: Keep your repos tidy.">
+<meta name="twitter:title" content="TIL: git clean: Keep your repos tidy.">
+
+<meta property="og:site_name" content="generativist’s thoughts">
+<meta property="og:url" content="https://thoughts.johnbnelson.com/til/git.html">
+<meta property="og:description" content="This built-in subcommand lets you keep things tidy.">
+<meta property="og:type" content="article">
+</head>
+<body>
+    
+<nav>
+    <a href="/">generativist’s page</a> » <a href="/til/">til</a> » <em>til: git clean</em>
+</nav>
+    
+<header id="title-block-header">
+<h1 class="title">TIL: git clean</h1>
+<p class="subtitle">Keep your repos tidy.</p>
+    <p class="version">Version: <a href="https://github.com/jbn/thoughts/commit/66149d0">66149d0</a></p>
+</header>
+<p><img src="git_files/git_0_0.jpeg" /></p>
+<p>Today I learned that <a href="https://git-scm.com/"><code>git</code></a> will emit a list of files matching your <a href="https://git-scm.com/docs/gitignore"><code>.gitignore</code> file</a> if you execute,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="op">!</span>git clean <span class="op">-</span>Xn</a></code></pre></div>
+<pre><code>Would remove git.html</code></pre>
+<p>To <strong>remove</strong> those files, execute,</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="op">!</span>git clean <span class="op">-</span>Xf</a></code></pre></div>
+<pre><code>Removing git.html</code></pre>
+<p>I’m almost always using git, so this saves me from writing a <code>.PHONY: clean</code> <code>Makefile</code> rule.</p>
+<p><a href="https://git-scm.com/docs/git-clean">Learn more about <code>git clean</code> here.</a></p>
+</body>
+</html>

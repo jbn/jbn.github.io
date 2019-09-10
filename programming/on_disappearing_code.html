@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="John Bjorn Nelson" />
+  <meta name="keywords" content="programming" />
+  <title>On Disappearing Code</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <!-- :// links break on dat?-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/sunburst.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+
+<meta name="description" content="Sometimes, good developer practices frustrate pattern discovery.">
+<meta name="author" content="John Bjorn Nelson">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@generativist">
+<meta name="twitter:creator" content="@generativist">
+<meta name="twitter:description" content="Sometimes, good developer practices frustrate pattern discovery.">
+
+<meta name="twitter:image" content="https://thoughts.johnbnelson.com/programming/on_disappearing_code_files/on_disappearing_code_8_0.png">
+<meta property="og:image" content="https://thoughts.johnbnelson.com/programming/on_disappearing_code_files/on_disappearing_code_8_0.png">
+
+<meta property="og:title" content="On Disappearing Code: Or, The Space Between Commits">
+<meta name="twitter:title" content="On Disappearing Code: Or, The Space Between Commits">
+
+<meta property="og:site_name" content="generativist’s thoughts">
+<meta property="og:url" content="https://thoughts.johnbnelson.com/programming/on_disappearing_code.html">
+<meta property="og:description" content="Sometimes, good developer practices frustrate pattern discovery.">
+<meta property="og:type" content="article">
+</head>
+<body>
+    
+<nav>
+    <a href="/">generativist’s page</a> » <a href="/programming/">programming</a> » <em>on disappearing code</em>
+</nav>
+    
+<header id="title-block-header">
+<h1 class="title">On Disappearing Code</h1>
+<p class="subtitle">Or, The Space Between Commits</p>
+    <p class="version">Version: <a href="https://github.com/jbn/thoughts/commit/66149d0">66149d0</a></p>
+</header>
+<p>I’m sure there’s a word for what I’m referring to, but I don’t know it. By <strong>disappearing code</strong>, I mean the kind you write as scaffolding. It exists in the space <em>between</em> commits, never making it into your repo. Usually you write it while investigating something. As soon as possible, you remove it so no one ever knows you wrote such slop</p>
+<p>Data scientists write <em>a lot</em> of disappearing code.[1]</p>
+<p>As the adage attests, on data analysis projects, you spend most of your time trying to make dirty data clean. That’s usually <a href="http://paulgraham.com/schlep.html">schlep work</a>. You write a little bit of code; some data break it; you try to identify a pattern inherent in the errant data; you update your code; that usually breaks something that previously worked; you update it again; you drink some coffee; then, you do this some more.</p>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+When I’m trying to fix a tiny bug. <a href="https://t.co/nml6ZS5quW">pic.twitter.com/nml6ZS5quW</a>
+</p>
+— Mike Bostock (<span class="citation" data-cites="mbostock">@mbostock</span>) <a href="https://twitter.com/mbostock/status/661650359069208576?ref_src=twsrc%5Etfw">November 3, 2015</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Days later, you have clean data — and, a not-so-sneaking-suspicion that, if you were to apply your data cleaning tool to new data, it would break.</p>
+<p>And, yes, it probably would break.</p>
+<p>Partly, such fragility is inherent to such a task. Dirty data violate expectations. It’s not reasonable to assume you’ve covered all the cases. However, there is a more insidious problem. Most of coding is a process. We need to acquire good habits because anything non-trivial doesn’t <a href="http://paulgraham.com/head.html">fit in our heads</a>. The code that remains after grooming has form. You can read it; you can review it; and, you can put pieces of it in your head. But, the other kind of code — the disappearing code that often monopolizes a project in terms of time — resists analysis. You can’t point to it because it’s ephemeral. This combination of a cognitive limitations <em>and</em> the absence of inspectable artifacts conspires to blind us.</p>
+<p>Of course, disappearing code need not forever remain hidden. At some point, someone intrepid coder reaches the magical point of sufficient frustration, after which they feel compelled to find a better solution. Often, after much decanting, deliberation, and doubt, this better solution evolves into a framework. And, when ameliorating disappearing code problems, such frameworks work best when opinionated.</p>
+<p>Why? The authors of the framework — the ones for whom the itch finally became unbearable — have paid their tuition in bitsweat.[2] They’ve learned the hard way what works; what tends to break; and, what tends to lead to maddening <a href="https://en.wikipedia.org/wiki/Heisenbug">Heisenbugs</a>. A good framework crystallizes this experience. Subsequent users don’t have to re-explore the entire terrain. The pioneering authors have already done that, and the framework is the map which guides them quickly and safely from A-to-Z, avoiding the badlands.</p>
+<figure>
+<img src="on_disappearing_code_files/on_disappearing_code_8_0.png" alt="Oregon trail screenshot that says, ‘Congratulations! You have made it to Oregon! Let’s see how many points you hve received.’" /><figcaption>Oregon trail screenshot that says, ‘Congratulations! You have made it to Oregon! Let’s see how many points you hve received.’</figcaption>
+</figure>
+<p>I wish I had a bulletproof prescription to make myself aware of disappearing code contexts. But, I don’t. However, I do know that, when your coding auto-pilot is on, you’re less likely to see it. So, turning the auto-pilot off generally helps. That’s hard though, especially with deadlines. Auto-pilot is the companion that allows you do slog through mind-numbing tedium.</p>
+<p>Instead, my preferred practice involves taking five minutes at the end of the day to write down what I did. That is, I try to articulate both the motivations and process. Often, it’s remarkable how the mere act of trying to name something clarifies. The label makes it less ephemeral. It grants you the cognitive manipulation, previously lost. This practice doesn’t payoff immediately. But, by the end of the week, reviewing all your log entries sometimes reveals opportunity. For me — at least a few times — the payoff has been huge. I’m not sure I would have stumbled upon some solutions by other means. And, in any case, I’m convinced the articulate-after-the-fact method reduces the distance between what I have now and something better.</p>
+<h2 id="notes">Notes</h2>
+<ol type="1">
+<li><p>I’m not a fan of “Data Scientist” as a title. It’s a misnomer — we’re mostly Data Janitors who moonlight as semi-competent statisticians. But, it’s the recognizable term. And, I’ll be damn sure to use it on my résumé.</p></li>
+<li><p>Nope, I’m not talking about <a href="https://twitter.com/bitsweat">Jeremy Daer</a>. It’s just such a wonderfully intuitive compound word, conveying something coders immediately grasp. Well played, Jeremy.</p></li>
+<li><p>This post was originally published <a href="https://dispatches.artifexdeus.com/on-disappearing-code-7fa2494203aa">on Medium</a>.</p></li>
+</ol>
+</body>
+</html>
